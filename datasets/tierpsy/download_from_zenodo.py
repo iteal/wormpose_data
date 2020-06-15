@@ -1,5 +1,6 @@
 from sickle import Sickle
 import re
+import csv
 import os
 import shutil
 import urllib.parse, urllib.request
@@ -14,9 +15,9 @@ DATASET = "user-open-worm-movement-database"
 
 
 def download_records(input_file: str):
-
     with open(input_file, "r") as f:
-        lines = [line.rstrip("\n") for line in f]
+        reader = csv.reader(f, delimiter=",")
+        lines = [line[0] for line in reader]
 
     out_dir = lines[0]
     names = lines[1:]
